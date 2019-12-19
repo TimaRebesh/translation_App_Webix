@@ -4,7 +4,9 @@ const currentUserFromServer =	{
 	password: "1",
 	groups: [
 		{
+			groupID: 123,
 			name: "Vegetables",
+			created: new Date(2005, 6, 2),
 			words: [
 				{
 					wordEn: "Tomato",
@@ -17,7 +19,9 @@ const currentUserFromServer =	{
 			]
 		},
 		{
+			groupID: 124,
 			name: "Movement",
+			created: new Date(2015, 10, 22),
 			words: [
 				{
 					wordEn: "to jupm",

@@ -30,3 +30,32 @@ padding-left: 10px;
 .toolbar {
     background-color: #ffffff;
 }
+
+.hover_list {
+    background-color: #fbe2ba;
+}
+
+.button_to_test {
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 10%;
+    background-color: #1bb3da;
+    color: #ffffff;
+}
+
+
+.webix_el_box {
+    border: none;
+    
+}
+
+.webix_control.webix_el_text {
+    font-size: 38px;
+    size: 28px;
+}
+
+.name_group {
+    font-size: 38px !important;
+   
+}

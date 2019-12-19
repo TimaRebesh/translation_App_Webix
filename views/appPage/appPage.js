@@ -1,10 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import {toolbar} from "./header";
-import {groups} from "../groups/groups";
+import {groups} from "../groups/allGroups";
 
 
 const tabbar = {
-	type: "space",
+
 	rows: [
 		{
 			type: "clean",
@@ -15,8 +15,8 @@ const tabbar = {
 					value: "groupsId",
 					multiview: true,
 					options: [
-						{value: "List", id: "groupsId"},
-						{value: "Test", id: "emptyView"}
+						{value: "My groups", id: "groupsId"},
+						{value: "Test results", id: "emptyView"}
 					]
 				},
 				{

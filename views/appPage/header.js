@@ -23,6 +23,7 @@ export const toolbar = {
 				$$("myDatatable").show();
 			}
 		},
-		{}
+		{},
+		{view: "button", type: "icon", icon: "mdi mdi-cogs", label: "Settings", width: 100, css: "webix_transparent"}
 	]
 };
