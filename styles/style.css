@@ -1,0 +1,32 @@
+.webix_toolbar {
+    background-color: #39a0cf;
+    color: #ffffff;
+  }
+.image_autorization {
+    max-width:100%;
+    max-height:100%;
+    display: block;
+    margin: 0 ;
+}
+
+.window_toolbar_progress {
+    background-color: #569fcf;
+    color: #ffffff;
+    padding-top: 6px;
+}
+
+.template_login {
+padding-top: 10px;
+font-size: 15px;
+color: #01a4d6;
+}
+
+.label_color {
+color: #5d5d5d;
+font-size: 18px;
+padding-left: 10px;
+}
+
+.toolbar {
+    background-color: #ffffff;
+}
