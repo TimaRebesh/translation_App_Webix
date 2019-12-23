@@ -10,11 +10,13 @@ const currentUserFromServer =	{
 			words: [
 				{
 					wordEn: "Tomato",
-					wordRu: "Помидор"
+					wordRu: "Помидор",
+					partsOfSpeech: "noun"
 				},
 				{
 					wordEn: "Cucumber",
-					wordRu: "Огурец"
+					wordRu: "Огурец",
+					partsOfSpeech: "noun"
 				}
 			]
 		},
@@ -24,18 +26,25 @@ const currentUserFromServer =	{
 			created: new Date(2015, 10, 22),
 			words: [
 				{
-					wordEn: "to jupm",
-					wordRu: "Прыгать"
+					wordEn: "jupm",
+					wordRu: "Прыгать",
+					partsOfSpeech: "verb"
 				},
 				{
 					wordEn: "to stay",
-					wordRu: "Стоять"
+					wordRu: "Стоять",
+					partsOfSpeech: "verb"
 				}
 			]
 		}
 	]
 };
+
 const currentUser = new webix.DataCollection({
+	data: currentUserFromServer
+});
+
+const currentUserGroups = new webix.DataCollection({
 	scheme: {
 		$init(object) {
 			const obj = object;
@@ -45,4 +54,8 @@ const currentUser = new webix.DataCollection({
 	data: currentUserFromServer.groups
 });
 
-export {currentUser};
+
+// const currentUserGroups = new webix.DataCollection({})
+
+export {currentUserGroups, currentUser};
+

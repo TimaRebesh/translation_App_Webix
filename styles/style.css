@@ -44,18 +44,9 @@ padding-left: 10px;
     color: #ffffff;
 }
 
-
-.webix_el_box {
-    border: none;
+.label_name_of_group .webix_el_box {
+    font-size: 28px;
+    color: #006efd;
     
 }
 
-.webix_control.webix_el_text {
-    font-size: 38px;
-    size: 28px;
-}
-
-.name_group {
-    font-size: 38px !important;
-   
-}

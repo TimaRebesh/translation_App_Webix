@@ -1,4 +1,6 @@
 /* eslint-disable import/prefer-default-export */
+import {settingsPopup} from "./settings";
+
 export const toolbar = {
 	view: "toolbar",
 	id: "toolbar",
@@ -24,6 +26,22 @@ export const toolbar = {
 			}
 		},
 		{},
-		{view: "button", type: "icon", icon: "mdi mdi-cogs", label: "Settings", width: 100, css: "webix_transparent"}
+		{
+			view: "button",
+			type: "icon",
+			icon: "mdi mdi-cogs",
+			label: "Settings",
+			width: 100,
+			css: "webix_transparent",
+			click() {
+				settingsPopup.show();
+			}
+		},
+		{
+			view: "button",
+			label: "Logout",
+			css: "webix_primary",
+			width: 100
+		}
 	]
 };

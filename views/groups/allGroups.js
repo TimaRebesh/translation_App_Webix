@@ -1,13 +1,14 @@
 /* eslint-disable import/prefer-default-export */
-import {currentUser} from "../../data/currentUser";
+import {currentUserGroups} from "../../data/currentUser";
 import {selectedGroup} from "./selectedGroup";
 
 const groupsListTable = {
 	view: "datatable",
+	id: "groupsListTable",
 	fixedRowHeight: false,
 	rowHeight: 60,
 	hover: "hover_list",
-	data: currentUser,
+	data: currentUserGroups,
 	columns: [
 		{
 			id: "name",
@@ -42,8 +43,15 @@ const groupsListTable = {
 		}
 	},
 	on: {
-		onItemDblClick() {
+		onItemDblClick(item) {
+			const wordsOfGroup = this.getItem(item);
+			$$("editableLabelID").config.label = wordsOfGroup.name;
+			$$("editableLabelID").refresh();
+			$$("tableOfSelectedGroup").parse(wordsOfGroup.words);
 			$$("tableOfSelectedGroup").refresh();
+
+			$$("labelWithIdOfCurrentProup").config.label = wordsOfGroup.groupID;
+
 			$$("selectedGroup").show();
 		}
 	},
@@ -56,7 +64,7 @@ const groupsListTable = {
 					cancel: "Cancel"
 				})
 				.then(() => {
-
+					currentUserGroups.remove(id);
 				});
 			return false;
 		},
@@ -71,7 +79,14 @@ const groupsListButton = {
 	css: "webix_primary",
 	value: "+ add new group",
 	width: 230,
-	click() {}
+	click() {
+		currentUserGroups.add({
+			groupID: webix.uid(),
+			name: "New",
+			created: new Date(),
+			words: []
+		}, -1);
+	}
 };
 
 const groupsList = {
@@ -86,8 +101,8 @@ const groups = {
 	id: "groupsId",
 	animate: false,
 	cells: [groupsList, selectedGroup]
+	// cells: [selectedGroup]
 
 
 };
-
 export {groups};
