@@ -2,6 +2,8 @@
 import {currentUserGroups} from "../../data/currentUser";
 import {selectedGroup} from "./selectedGroup";
 import {englishPartsOfSpeechServer} from "../../data/partsOfSpeech";
+import {testResultsPage} from "../testResults/testResultsPage";
+import {checkChoice} from "../toTest/testPage";
 
 let mixedWords = [];
 let currentWordInArr = 0;
@@ -18,7 +20,6 @@ function shuffleArray(arr) {
 }
 
 function setLabelsForTest() {
-	// eslint-disable-next-line no-mixed-operators
 	if (currentWordInArr === mixedWords.length) { return false; }
 
 	const buttonNumRightAnswer = Math.round(0.5 + Math.random() * 4);
@@ -35,6 +36,7 @@ function setLabelsForTest() {
 	let mixedArrCurrentSpeechPart = shuffleArray(arrCurrentSpeechPart);
 
 	$$("button_1").config.label = mixedArrCurrentSpeechPart[1];
+	$$("button_1").refresh();
 	$$("button_2").config.label = mixedArrCurrentSpeechPart[2];
 	$$("button_2").refresh();
 	$$("button_3").config.label = mixedArrCurrentSpeechPart[3];
@@ -45,8 +47,24 @@ function setLabelsForTest() {
 	$$(`button_${buttonNumRightAnswer}`).config.label = mixedWords[currentWordInArr].wordEn;
 	$$(`button_${buttonNumRightAnswer}`).refresh();
 
-	currentWordInArr++;
+	$$("button_1").attachEvent("onItemClick", (id) => {
+		const idButton = id;
+		checkChoice(idButton);
+	});
+	$$("button_2").attachEvent("onItemClick", (id) => {
+		const idButton = id;
+		checkChoice(idButton);
+	});
+	$$("button_3").attachEvent("onItemClick", (id) => {
+		const idButton = id;
+		checkChoice(idButton);
+	});
+	$$("button_4").attachEvent("onItemClick", (id) => {
+		const idButton = id;
+		checkChoice(idButton);
+	});
 
+	currentWordInArr++;
 	return true;
 }
 

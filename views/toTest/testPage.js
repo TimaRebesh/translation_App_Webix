@@ -1,5 +1,5 @@
 import {mixedWords, setLabelsForTest, currentWordInArr} from "../groups/allGroups";
-
+import {winowOfLastResult} from "../testResults/testResultsPage";
 
 const word = {
 	view: "label",
@@ -11,7 +11,7 @@ const word = {
 const partOfSpeech = {
 	view: "label",
 	id: "partOfSpeechTest",
-	label: "<span class='partOfSpeech_test'>partOfSpeech</span>",
+	label: "",
 	align: "center"
 };
 
@@ -28,23 +28,40 @@ const buttonBack = 	{
 	}
 };
 
-function checkChoice() {
+// let correctAnswers = 0;
+// let wrongAnswers = 0;
+
+const checkChoice = function (id) {
+	const idButton = $$(id);
 	let currentWord = currentWordInArr - 1;
-	if (mixedWords[currentWord].wordEn === this.config.label) {
-		webix.html.addCss(this.$view, "button_right");
-		this.refresh();
+	if (mixedWords[currentWord].wordEn === idButton.config.label) {
+		webix.html.addCss(idButton.$view, "button_right");
+		idButton.refresh();
+
+		$$("labelCorrectAnswer").config.correctAnswers++;
+
+		if ($$("partOfSpeechTest").config.label === "noun" || "verb") {
+			$$("scoredPoints").config.scoredPoints += 2;
+		}
+		else { $$("scoredPoints").config.scoredPoints += 1; }
 	}
 	else {
-		webix.html.addCss(this.$view, "button_lose");
-		this.refresh();
+		webix.html.addCss(idButton.$view, "button_lose");
+		idButton.refresh();
 
 		$$("button_1").config.label == mixedWords[currentWord].wordEn ? webix.html.addCss($$("button_1").$view, "button_right") :
 			$$("button_2").config.label == mixedWords[currentWord].wordEn ? webix.html.addCss($$("button_2").$view, "button_right") :
 				$$("button_3").config.label == mixedWords[currentWord].wordEn ? webix.html.addCss($$("button_3").$view, "button_right") :
 					webix.html.addCss($$("button_4").$view, "button_right");
+
+		$$("labelWrongtAnswer").config.wrongAnswers++;
 	}
 	$$("buttonNext").show();
-}
+	$$("button_1").detachEvent("onItemClick");
+	$$("button_2").detachEvent("onItemClick");
+	$$("button_3").detachEvent("onItemClick");
+	$$("button_4").detachEvent("onItemClick");
+};
 
 function cleanButtonColor(buttonId) {
 	webix.html.removeCss(buttonId.$view, "button_right");
@@ -56,16 +73,14 @@ const buttonleftUp = {
 	id: "button_1",
 	label: "buttonleftUp",
 	height: 300,
-	css: "webix_primary",
-	click: checkChoice
+	css: "webix_primary"
 };
 
 const buttonRightUp = {
 	view: "button",
 	id: "button_2",
 	label: "buttonRightUp",
-	css: "webix_primary",
-	click: checkChoice
+	css: "webix_primary"
 };
 
 const buttonleftDown = {
@@ -73,37 +88,49 @@ const buttonleftDown = {
 	id: "button_3",
 	label: "buttonleftDown",
 	height: 300,
-	css: "webix_primary",
-	click: checkChoice
+	css: "webix_primary"
 };
 
 const buttonRightDown = {
 	view: "button",
 	id: "button_4",
 	label: "buttonRightDown",
-	css: "webix_primary",
-	click: checkChoice
+	css: "webix_primary"
 };
 
 const nextWord = {
 	view: "button",
 	id: "buttonNext",
 	label: "next ->",
-	css: "webix_primary",
+	css: "button_next_test",
 	hotkey: "enter",
 	click() {
 		cleanButtonColor($$("button_1"));
 		cleanButtonColor($$("button_2"));
 		cleanButtonColor($$("button_3"));
 		cleanButtonColor($$("button_4"));
+
+		if (mixedWords.length === currentWordInArr) {
+			$$("tabbar").config.value = "testResultsPage";
+			$$("tabbar").refresh();
+			$$("tabbarApp").show();
+			$$("testResultsPage").show();
+			$$("labelCorrectAnswer").refresh();
+			$$("labelWrongtAnswer").refresh();
+			$$("winowOfLastResult").show();
+
+			$$("labelCorrectAnswer").config.correctAnswers = 0;
+			$$("labelWrongtAnswer").config.wrongAnswers = 0;
+		}
+
 		setLabelsForTest();
 		this.hide();
 	},
 	hidden: true
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export const testPage = {
+
+const testPage = {
 	id: "testPage",
 	css: "testPage",
 	rows: [
@@ -134,3 +161,5 @@ export const testPage = {
 	]
 
 };
+
+export {checkChoice, testPage};

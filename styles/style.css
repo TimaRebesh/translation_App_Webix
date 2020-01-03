@@ -78,6 +78,7 @@ padding-left: 10px;
 .button_right .webix_button{
     background:#0bf00b;
 }
+
 .button_right .webix_button:hover{
     background:#0bf00b;
 }
@@ -85,7 +86,38 @@ padding-left: 10px;
 .button_lose .webix_button{
     background:#dd1c0a;
 }
+
 .button_lose .webix_button:hover{
     background:#dd1c0a;
 }
 
+.button_next_test .webix_button{
+    background:#eb9d0c;
+    color: #ffffff;
+}
+
+.label_window_last_result {
+    padding-left: 20px;
+    color: #ffffff;
+    font-size: 29px;
+}
+
+.last_result_info { 
+    color: #000000;
+    font-size: 20px;
+}
+
+.correct_answer {
+    color: #1cda0b;
+    font-weight: bold;
+}
+
+.wrong_answer {
+    color: #da0b0b;
+    font-weight: bold;
+}
+
+.scored_points {
+    color: #0b5ada;
+    font-weight: bold; 
+}

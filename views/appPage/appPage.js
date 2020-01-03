@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import {toolbar} from "./header";
 import {groups} from "../groups/allGroups";
-import {testResults} from "../testResults/testResults";
+import {testResultsPage} from "../testResults/testResultsPage";
 import {testPage} from "../toTest/testPage";
 
 
@@ -18,13 +18,13 @@ const tabbar = {
 					multiview: true,
 					options: [
 						{value: "My groups", id: "groupsId"},
-						{value: "Test results", id: "testResults"}
+						{value: "Test results", id: "testResultsPage"}
 					]
 				},
 				{
 					cells: [
 						groups,
-						testResults
+						testResultsPage
 					]
 				}
 			]
