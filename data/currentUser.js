@@ -11,12 +11,14 @@ const currentUserFromServer =	{
 				{
 					wordEn: "Tomato",
 					wordRu: "Помидор",
-					partsOfSpeech: "noun"
+					psEn: "noun",
+					psRu: "существительное"
 				},
 				{
 					wordEn: "Cucumber",
 					wordRu: "Огурец",
-					partsOfSpeech: "noun"
+					psEn: "noun",
+					psRu: "существительное"
 				}
 			]
 		},
@@ -28,12 +30,81 @@ const currentUserFromServer =	{
 				{
 					wordEn: "jupm",
 					wordRu: "Прыгать",
-					partsOfSpeech: "verb"
+					psEn: "verb",
+					psRu: "глагол"
 				},
 				{
 					wordEn: "to stay",
 					wordRu: "Стоять",
-					partsOfSpeech: "verb"
+					psEn: "verb",
+					psRu: "глагол"
+				}
+			]
+		},
+		{
+			name: "Traveling",
+			groupID: 125,
+			created: new Date(2019, 12, 29),
+			words: [
+				{
+					wordEn: "quickly",
+					wordRu: "быстро",
+					psEn: "adverb",
+					psRu: "наречие"
+				},
+				{
+					wordEn: "you ",
+					wordRu: "ты",
+					psEn: "pronoun",
+					psRu: "местоимение"
+				},
+				{
+					wordEn: "from ",
+					wordRu: "из",
+					psEn: "preposition",
+					psRu: "предлог"
+				},
+				{
+					wordEn: "now ",
+					wordRu: "сейчас",
+					psEn: "adverb",
+					psRu: "наречие"
+				},
+				{
+					wordEn: "name ",
+					wordRu: "имя",
+					psEn: "noun",
+					psRu: "существительное"
+				},
+				{
+					wordEn: "I",
+					wordRu: "я",
+					psEn: "pronoun",
+					psRu: "местоимение"
+				},
+				{
+					wordEn: "ask ",
+					wordRu: "спрашивать",
+					psEn: "verb",
+					psRu: "глагол"
+				},
+				{
+					wordEn: "city",
+					wordRu: "город",
+					psEn: "noun",
+					psRu: "существительное"
+				},
+				{
+					wordEn: "go",
+					wordRu: "идти",
+					psEn: "verb",
+					psRu: "глагол"
+				},
+				{
+					wordEn: "young ",
+					wordRu: "молодой",
+					psEn: "adjective",
+					psRu: "прилагательное"
 				}
 			]
 		}

@@ -1,6 +1,54 @@
 /* eslint-disable import/prefer-default-export */
 import {currentUserGroups} from "../../data/currentUser";
 import {selectedGroup} from "./selectedGroup";
+import {englishPartsOfSpeechServer} from "../../data/partsOfSpeech";
+
+let mixedWords = [];
+let currentWordInArr = 0;
+
+function shuffleArray(arr) {
+	let array = arr;
+	for (let i = array.length - 1; i > 0; i--) {
+		let j = Math.floor(Math.random() * (i + 1));
+		let temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+	return arr;
+}
+
+function setLabelsForTest() {
+	// eslint-disable-next-line no-mixed-operators
+	if (currentWordInArr === mixedWords.length) { return false; }
+
+	const buttonNumRightAnswer = Math.round(0.5 + Math.random() * 4);
+
+	$$("wordTest").config.label = mixedWords[currentWordInArr].wordRu;
+	$$("wordTest").refresh();
+
+	const currentPartOfSpeech = mixedWords[currentWordInArr].psEn;
+	$$("partOfSpeechTest").config.label = currentPartOfSpeech;
+	$$("partOfSpeechTest").refresh();
+
+
+	let arrCurrentSpeechPart = englishPartsOfSpeechServer[currentPartOfSpeech];
+	let mixedArrCurrentSpeechPart = shuffleArray(arrCurrentSpeechPart);
+
+	$$("button_1").config.label = mixedArrCurrentSpeechPart[1];
+	$$("button_2").config.label = mixedArrCurrentSpeechPart[2];
+	$$("button_2").refresh();
+	$$("button_3").config.label = mixedArrCurrentSpeechPart[3];
+	$$("button_3").refresh();
+	$$("button_4").config.label = mixedArrCurrentSpeechPart[4];
+	$$("button_4").refresh();
+
+	$$(`button_${buttonNumRightAnswer}`).config.label = mixedWords[currentWordInArr].wordEn;
+	$$(`button_${buttonNumRightAnswer}`).refresh();
+
+	currentWordInArr++;
+
+	return true;
+}
 
 const groupsListTable = {
 	view: "datatable",
@@ -68,8 +116,12 @@ const groupsListTable = {
 				});
 			return false;
 		},
-		button_to_test: () => {
-			webix.message("test");
+		button_to_test: (event, column) => {
+			const selGroup = $$("groupsListTable").getItem(column.row).words;
+			mixedWords = shuffleArray(selGroup);
+			setLabelsForTest();
+
+			$$("testPage").show();
 		}
 	}
 };
@@ -105,4 +157,4 @@ const groups = {
 
 
 };
-export {groups};
+export {groups, mixedWords, currentWordInArr, setLabelsForTest};

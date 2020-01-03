@@ -1,69 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import {currentUserGroups, currentUser} from "../../data/currentUser";
-import {chosenGroup} from "./allGroups";
-
-
-const tableOfSelectedGroup = {
-	view: "datatable",
-	id: "tableOfSelectedGroup",
-	fixedRowHeight: false,
-	rowHeight: 60,
-	select: true,
-	header: false,
-	editable: true,
-	editaction: "dblclick",
-	autoConfig: true,
-	columns: [
-		{adjust: true},
-		{
-			id: "wordEn",
-			adjust: true,
-			editor: "text"
-		},
-		{
-			template: "-",
-			width: 20
-		},
-		{
-			id: "wordRu",
-			adjust: true,
-			editor: "text"
-		},
-		{
-			template: "-",
-			width: 20
-		},
-		{
-			id: "partsOfSpeech",
-			editor: "combo",
-			collection: ["noun", "verb", "pronoun", "adverb", "article", "preposition", "conjunction"],
-			width: 100
-		},
-		{fillspace: 1},
-		{
-			id: "",
-			template: "{common.trashIcon()}",
-			width: 40
-		}
-	],
-	onClick: {
-		"wxi-trash": (e, id) => {
-			console.log(id);
-			webix
-				.confirm({
-					text: "Are you sure?",
-					ok: "Delete",
-					cancel: "Cancel"
-				})
-				.then(() => {
-					let sel = $$("tableOfSelectedGroup").getSelectedId();
-					if (!sel) return;
-					$$("tableOfSelectedGroup").remove(sel);
-				});
-		}
-
-	}
-};
+import {tableOfSelectedGroup} from "./gridSelectedGroup";
 
 webix.protoUI(
 	{
@@ -116,6 +52,7 @@ const buttonBack = 	{
 	label: "back",
 	width: 100,
 	css: "webix_transparent",
+	hotkey: "esc",
 	click() {
 		$$("groupsId").back();
 		$$("tableOfSelectedGroup").clearAll();
@@ -144,6 +81,18 @@ const addNewWordsButton = {
 	}
 };
 
+
+const buttonToTest = {
+	view: "button",
+	label: "go to Test",
+	css: "webix_primary",
+	width: 230,
+	click() {
+		$$("testPage").show();
+	}
+};
+
+
 const selectedGroup = {
 	id: "selectedGroup",
 	rows: [
@@ -163,8 +112,10 @@ const selectedGroup = {
 		},
 
 		tableOfSelectedGroup,
-		addNewWordsButton
-
+		{cols: [
+			addNewWordsButton,
+			buttonToTest]
+		}
 	]
 };
 

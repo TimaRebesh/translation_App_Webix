@@ -1,10 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 import {toolbar} from "./header";
 import {groups} from "../groups/allGroups";
+import {testResults} from "../testResults/testResults";
+import {testPage} from "../toTest/testPage";
 
 
 const tabbar = {
-
+	id: "tabbarApp",
 	rows: [
 		{
 			type: "clean",
@@ -16,13 +18,13 @@ const tabbar = {
 					multiview: true,
 					options: [
 						{value: "My groups", id: "groupsId"},
-						{value: "Test results", id: "emptyView"}
+						{value: "Test results", id: "testResults"}
 					]
 				},
 				{
 					cells: [
 						groups,
-						{id: "emptyView", template: "dfdfdd "}
+						testResults
 					]
 				}
 			]
@@ -34,6 +36,8 @@ export const appPage = {
 	id: "appPage",
 	rows: [
 		toolbar,
-		tabbar
+		{animate: false,
+			cells: [tabbar, testPage]
+		}
 	]
 };
