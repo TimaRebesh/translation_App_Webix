@@ -52,7 +52,7 @@ const buttonBack = 	{
 	label: "back",
 	width: 100,
 	css: "webix_transparent",
-	hotkey: "esc",
+	hotkey: "backspace",
 	click() {
 		$$("groupsId").back();
 		$$("tableOfSelectedGroup").clearAll();

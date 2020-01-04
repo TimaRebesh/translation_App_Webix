@@ -24,11 +24,11 @@ function setLabelsForTest() {
 
 	const buttonNumRightAnswer = Math.round(0.5 + Math.random() * 4);
 
-	$$("wordTest").config.label = mixedWords[currentWordInArr].wordRu;
+	$$("wordTest").config.currentValue = mixedWords[currentWordInArr].wordRu;
 	$$("wordTest").refresh();
 
 	const currentPartOfSpeech = mixedWords[currentWordInArr].psEn;
-	$$("partOfSpeechTest").config.label = currentPartOfSpeech;
+	$$("partOfSpeechTest").config.currentValue = currentPartOfSpeech;
 	$$("partOfSpeechTest").refresh();
 
 
@@ -94,8 +94,13 @@ const groupsListTable = {
 			fillspace: 1
 		},
 		{
-			template: "{common.toTest()}",
-			fillspace: 1
+			fillspace: 1,
+			template: (obj) => {
+				if (obj.amount === 0) {
+					return "";
+				}
+				return "<button type='button' class='button_to_test'>Test</button>";
+			}
 		},
 		{
 			id: "",
@@ -103,11 +108,11 @@ const groupsListTable = {
 			width: 40
 		}
 	],
-	type: {
-		toTest() {
-			return "<button type='button' class='button_to_test'>Test</button>";
-		}
-	},
+	// type: {
+	// 	toTest() {
+	// 		return "<button type='button' class='button_to_test'>Test</button>";
+	// 	}
+	// },
 	on: {
 		onItemDblClick(item) {
 			const wordsOfGroup = this.getItem(item);
@@ -137,8 +142,8 @@ const groupsListTable = {
 		button_to_test: (event, column) => {
 			const selGroup = $$("groupsListTable").getItem(column.row).words;
 			mixedWords = shuffleArray(selGroup);
+			currentWordInArr = 0;
 			setLabelsForTest();
-
 			$$("testPage").show();
 		}
 	}

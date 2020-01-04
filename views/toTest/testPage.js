@@ -1,37 +1,8 @@
+/* eslint-disable no-constant-condition */
 import {mixedWords, setLabelsForTest, currentWordInArr} from "../groups/allGroups";
 import {winowOfLastResult} from "../testResults/testResultsPage";
 
-const word = {
-	view: "label",
-	id: "wordTest",
-	label: "<span class='word_test'>Word</span>",
-	align: "center"
-};
-
-const partOfSpeech = {
-	view: "label",
-	id: "partOfSpeechTest",
-	label: "",
-	align: "center"
-};
-
-const buttonBack = 	{
-	view: "button",
-	type: "icon",
-	icon: "wxi-angle-double-left",
-	label: "back",
-	width: 250,
-	hotkey: "backspace",
-	css: "webix_transparent",
-	click() {
-		$$("tabbarApp").show();
-	}
-};
-
-// let correctAnswers = 0;
-// let wrongAnswers = 0;
-
-const checkChoice = function (id) {
+const checkChoice = (id) => {
 	const idButton = $$(id);
 	let currentWord = currentWordInArr - 1;
 	if (mixedWords[currentWord].wordEn === idButton.config.label) {
@@ -40,10 +11,25 @@ const checkChoice = function (id) {
 
 		$$("labelCorrectAnswer").config.correctAnswers++;
 
-		if ($$("partOfSpeechTest").config.label === "noun" || "verb") {
+		let partOfSpeec = $$("partOfSpeechTest").config.currentValue;
+		console.log(partOfSpeec);
+		if (partOfSpeec === "noun" || partOfSpeec === "verb") {
 			$$("scoredPoints").config.scoredPoints += 2;
+			$$("point").config.currentValue = 2;
+			$$("point").refresh();
 		}
-		else { $$("scoredPoints").config.scoredPoints += 1; }
+		else {
+			$$("scoredPoints").config.scoredPoints += 1;
+			$$("point").config.currentValue = 1;
+			$$("point").refresh();
+		}
+
+		$$("point").show();
+		webix.html.addCss($$("point").$view, "animated flash");
+		webix.delay(() => {
+			webix.html.removeCss($$("point").$view, "animated flash");
+			$$("point").hide();
+		}, null, null, 1000);
 	}
 	else {
 		webix.html.addCss(idButton.$view, "button_lose");
@@ -67,6 +53,51 @@ function cleanButtonColor(buttonId) {
 	webix.html.removeCss(buttonId.$view, "button_right");
 	webix.html.removeCss(buttonId.$view, "button_lose");
 }
+
+const cleanTest = () => {
+	cleanButtonColor($$("button_1"));
+	cleanButtonColor($$("button_2"));
+	cleanButtonColor($$("button_3"));
+	cleanButtonColor($$("button_4"));
+
+	$$("labelCorrectAnswer").config.correctAnswers = 0;
+	$$("labelWrongtAnswer").config.wrongAnswers = 0;
+	$$("scoredPoints").config.scoredPoints = 0;
+
+	$$("buttonNext").hide();
+};
+
+const buttonBack = 	{
+	view: "button",
+	type: "icon",
+	icon: "wxi-angle-double-left",
+	label: "Leave the test",
+	width: 250,
+	hotkey: "backspace",
+	css: "webix_transparent",
+	click() {
+		cleanTest();
+		$$("tabbarApp").show();
+	}
+};
+
+const word = {
+	view: "label",
+	id: "wordTest",
+	align: "center",
+	height: 70,
+	currentValue: "",
+	template: (obj, view) => `<span class='word_test'>${view.config.currentValue}</span>`
+};
+
+const partOfSpeech = {
+	view: "label",
+	id: "partOfSpeechTest",
+	align: "center",
+	height: 40,
+	currentValue: "",
+	template: (obj, view) => `<span class='partOfSpeech_test'>${view.config.currentValue}</span>`
+};
 
 const buttonleftUp = {
 	view: "button",
@@ -103,6 +134,7 @@ const nextWord = {
 	id: "buttonNext",
 	label: "next ->",
 	css: "button_next_test",
+	height: 60,
 	hotkey: "enter",
 	click() {
 		cleanButtonColor($$("button_1"));
@@ -129,13 +161,26 @@ const nextWord = {
 	hidden: true
 };
 
+const point = {
+	view: "label",
+	id: "point",
+	currentValue: "",
+	align: "left",
+	height: 100,
+	hidden: true,
+	template: (obj, view) => `<span class='point_test'>+${view.config.currentValue}</span>`
+
+};
 
 const testPage = {
 	id: "testPage",
 	css: "testPage",
 	rows: [
-		buttonBack,
-		{view: "label", template: "<p class='label_test'>Test</p>"},
+		{cols: [
+			buttonBack,
+			{view: "label", height: 40, template: "<p class='label_test'>Test</p>"},
+			{}
+		]},
 		{
 			cols: [
 				{gravity: 1},
@@ -155,11 +200,13 @@ const testPage = {
 						{}
 					]
 				},
-				{gravity: 1}
+				{gravity: 1,
+					rows: [{}, point, {}]
+				}
 			]
 		}
 	]
 
 };
 
-export {checkChoice, testPage};
+export {checkChoice, testPage, cleanTest};

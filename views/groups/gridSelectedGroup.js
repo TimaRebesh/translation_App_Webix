@@ -44,7 +44,6 @@ export const tableOfSelectedGroup = {
 	],
 	onClick: {
 		"wxi-trash": (e, id) => {
-			console.log(id);
 			webix
 				.confirm({
 					text: "Are you sure?",

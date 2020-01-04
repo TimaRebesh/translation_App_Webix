@@ -51,11 +51,11 @@ padding-left: 10px;
 }
 
 .word_test {
-    font-size: 48px;
+    font-size: 58px;
 }
 
-/* .partOfSpeech_test {
-    font-size: 28px;
+.partOfSpeech_test {
+    font-size: 22px;
 }
 
 .testPage {
@@ -63,8 +63,11 @@ padding-left: 10px;
 }
 
 .label_test {
-    font-size: 28px;
-} */
+    font-size: 24px;
+    font-weight: 900;
+    margin-top: 4px;
+    color:#eb9d0c;
+}
 .color_button_test .webix_button{
     background:#1CA1C1;  
     color: #ffffff;
@@ -83,6 +86,11 @@ padding-left: 10px;
     background:#0bf00b;
 }
 
+.button_right .webix_button:focus{
+    background:#0bf00b;
+}
+
+
 .button_lose .webix_button{
     background:#dd1c0a;
 }
@@ -91,9 +99,26 @@ padding-left: 10px;
     background:#dd1c0a;
 }
 
+.button_lose .webix_button:focus{
+    background:#dd1c0a;
+}
+
+
 .button_next_test .webix_button{
     background:#eb9d0c;
     color: #ffffff;
+}
+
+.button_next_test .webix_button:hover{
+    background:#976508;
+    color: #ffffff;
+}
+
+.point_test {
+    font-size: 60px;
+    font-weight: 900;
+    margin-left: 4px;
+    color: #0bf00b;
 }
 
 .label_window_last_result {
@@ -121,3 +146,4 @@ padding-left: 10px;
     color: #0b5ada;
     font-weight: bold; 
 }
+

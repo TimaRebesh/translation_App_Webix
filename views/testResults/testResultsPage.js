@@ -1,4 +1,4 @@
-import {correctAnswers, wrongAnswers} from "../toTest/testPage";
+import {correctAnswers, wrongAnswers, cleanTest} from "../toTest/testPage";
 
 const testResultsPage = {
 	id: "testResultsPage",
@@ -26,6 +26,7 @@ const winowOfLastResult = webix.ui({
 				css: "alter",
 				hotkey: "esc",
 				click() {
+					cleanTest();
 					$$("winowOfLastResult").hide();
 				}
 			}
