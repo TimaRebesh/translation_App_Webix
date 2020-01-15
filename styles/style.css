@@ -147,3 +147,24 @@ padding-left: 10px;
     font-weight: bold; 
 }
 
+.score_label {
+    color: #0b5ada;
+    font-weight: bold; 
+    font-size: 29px;
+    padding: 20px;
+}
+
+.score_result {
+    color: #1cda0b;
+    font-weight: bold;
+    font-size: 29px;
+}
+
+.results_info {
+    position: absolute;
+    padding: 12px;
+}
+
+.results_info_lab {
+    padding: 10px;
+}

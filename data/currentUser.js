@@ -2,6 +2,13 @@ const currentUserFromServer =	{
 	userId: 11,
 	name: "Jack",
 	password: "1",
+	score: "100",
+	testsResults: [
+		{date: new Date(2020, 1, 1), result: 12},
+		{date: new Date(2019, 3, 2), result: 11},
+		{date: new Date(2018, 5, 2), result: 10},
+		{date: new Date(2017, 4, 2), result: 9}
+	],
 	groups: [
 		{
 			groupID: 123,
@@ -125,8 +132,18 @@ const currentUserGroups = new webix.DataCollection({
 	data: currentUserFromServer.groups
 });
 
+const testsResults = new webix.DataCollection({
+	scheme: {
+		$init(object) {
+			const obj = object;
+			obj.date = webix.i18n.dateFormatStr(obj.date);
+		}
+	},
+	data: currentUserFromServer.testsResults
+});
+
 
 // const currentUserGroups = new webix.DataCollection({})
 
-export {currentUserGroups, currentUser};
+export {currentUserGroups, currentUser, currentUserFromServer, testsResults};
 

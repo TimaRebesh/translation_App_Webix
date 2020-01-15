@@ -1,62 +1,32 @@
-import {correctAnswers, wrongAnswers, cleanTest} from "../toTest/testPage";
+import {correctAnswers, wrongAnswers} from "../toTest/testPage";
+import {currentUserFromServer, testsResults} from "../../data/currentUser";
+
+
+const score = {
+	view: "label",
+	id: "score",
+	height: 70,
+	currentValue: currentUserFromServer.score,
+	template: (obj, view) => `<spsan class='score_label'>Score:</span><span class='score_result'>${view.config.currentValue}</span>`
+};
+
+const testResultList = {
+	view: "list",
+	id: "testResultList",
+	type: {
+		height: 57
+	},
+	template: "<div class='results_info'><b class='results_info_lab'>date:</b>#date#. <b class='results_info_lab'>result:</b>#result#</div>",
+	data: testsResults
+};
 
 const testResultsPage = {
 	id: "testResultsPage",
 	rows: [
-		{view: "label",
-			label: "resust"},
-		{view: "label",
-			label: "dfddf"}
+		score,
+		testResultList
 	]
 };
 
-const winowOfLastResult = webix.ui({
-	view: "window",
-	id: "winowOfLastResult",
-	modal: true,
-	position: "center",
-	head: {
-		view: "toolbar",
-		id: "windowHead",
-		cols: [
-			{view: "label", template: "Your result", css: "label_window_last_result"},
-			{
-				view: "icon",
-				icon: "mdi mdi-close",
-				css: "alter",
-				hotkey: "esc",
-				click() {
-					cleanTest();
-					$$("winowOfLastResult").hide();
-				}
-			}
-		]
-	},
-	body: {
-		view: "form",
-		id: "formInWindow",
-		width: 300,
-		elements: [
-			{
-				view: "label",
-				id: "labelCorrectAnswer",
-				correctAnswers: 0,
-				template: (obj, view) => `<span class='last_result_info'>Correct answers:<span class='correct_answer'> ${view.config.correctAnswers}</span></span>`
-			},
-			{
-				view: "label",
-				id: "labelWrongtAnswer",
-				wrongAnswers: 0,
-				template: (obj, view) => `<span class='last_result_info'>Wrong answers: <span class='wrong_answer'>${view.config.wrongAnswers}</span></span>`
-			},
-			{
-				view: "label",
-				id: "scoredPoints",
-				scoredPoints: 0,
-				template: (obj, view) => `<span class='last_result_info'>Scored points: <span class='scored_points'>${view.config.scoredPoints}</span></span>`
-			}
-		]
-	}
-});
 
-export {testResultsPage, winowOfLastResult};
+export {testResultsPage};

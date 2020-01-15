@@ -1,6 +1,7 @@
 /* eslint-disable no-constant-condition */
 import {mixedWords, setLabelsForTest, currentWordInArr} from "../groups/allGroups";
-import {winowOfLastResult} from "../testResults/testResultsPage";
+import {winowOfLastResult} from "../testResults/windowOfLastResult";
+import {testsResults} from "../../data/currentUser";
 
 const checkChoice = (id) => {
 	const idButton = $$(id);
@@ -12,7 +13,7 @@ const checkChoice = (id) => {
 		$$("labelCorrectAnswer").config.correctAnswers++;
 
 		let partOfSpeec = $$("partOfSpeechTest").config.currentValue;
-		console.log(partOfSpeec);
+
 		if (partOfSpeec === "noun" || partOfSpeec === "verb") {
 			$$("scoredPoints").config.scoredPoints += 2;
 			$$("point").config.currentValue = 2;
@@ -35,10 +36,16 @@ const checkChoice = (id) => {
 		webix.html.addCss(idButton.$view, "button_lose");
 		idButton.refresh();
 
-		$$("button_1").config.label == mixedWords[currentWord].wordEn ? webix.html.addCss($$("button_1").$view, "button_right") :
-			$$("button_2").config.label == mixedWords[currentWord].wordEn ? webix.html.addCss($$("button_2").$view, "button_right") :
-				$$("button_3").config.label == mixedWords[currentWord].wordEn ? webix.html.addCss($$("button_3").$view, "button_right") :
-					webix.html.addCss($$("button_4").$view, "button_right");
+		if ($$("button_1").config.label === mixedWords[currentWord].wordEn) {
+			webix.html.addCss($$("button_1").$view, "button_right");
+		}
+		else if ($$("button_2").config.label === mixedWords[currentWord].wordEn) {
+			webix.html.addCss($$("button_2").$view, "button_right");
+		}
+		else if ($$("button_3").config.label === mixedWords[currentWord].wordEn) {
+			webix.html.addCss($$("button_3").$view, "button_right");
+		}
+		else { webix.html.addCss($$("button_4").$view, "button_right"); }
 
 		$$("labelWrongtAnswer").config.wrongAnswers++;
 	}
@@ -143,6 +150,15 @@ const nextWord = {
 		cleanButtonColor($$("button_4"));
 
 		if (mixedWords.length === currentWordInArr) {
+			$$("score").config.currentValue = Number($$("score").config.currentValue) + Number($$("scoredPoints").config.scoredPoints);
+			$$("score").refresh();
+
+			testsResults.add({
+				date: new Date(),
+				result: $$("scoredPoints").config.scoredPoints
+			});
+			$$("testResultList").refresh();
+
 			$$("tabbar").config.value = "testResultsPage";
 			$$("tabbar").refresh();
 			$$("tabbarApp").show();
