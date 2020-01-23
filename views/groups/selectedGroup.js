@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import {tableOfSelectedGroup} from "./gridSelectedGroup";
+import {currentUserGroups} from "../../data/currentUser";
 
 webix.protoUI(
 	{
@@ -52,7 +53,6 @@ const buttonBack = 	{
 	label: "back",
 	width: 100,
 	css: "webix_transparent",
-	hotkey: "backspace",
 	click() {
 		$$("groupsId").back();
 		$$("tableOfSelectedGroup").clearAll();
@@ -81,17 +81,22 @@ const addNewWordsButton = {
 	}
 };
 
-
-const buttonToTest = {
+const buttonToExcel = {
 	view: "button",
-	label: "go to Test",
+	label: "export to Excel",
 	css: "webix_primary",
 	width: 230,
 	click() {
-		$$("testPage").show();
+		webix.toExcel($$("tableOfSelectedGroup"), {
+			filename: "my words",
+			columns: {
+				wordEn: {header: "English words", width: 200},
+				wordRu: {header: "Russian words", width: 200},
+				psEn: {header: "Parts of speach", width: 200}
+			}
+		});
 	}
 };
-
 
 const selectedGroup = {
 	id: "selectedGroup",
@@ -107,15 +112,13 @@ const selectedGroup = {
 					id: "editableLabelID",
 					css: "label_name_of_group"
 				},
-				{height: 80}
+				{height: 80},
+				buttonToExcel
 			]
 		},
-
 		tableOfSelectedGroup,
-		{cols: [
-			addNewWordsButton,
-			buttonToTest]
-		}
+		addNewWordsButton
+
 	]
 };
 

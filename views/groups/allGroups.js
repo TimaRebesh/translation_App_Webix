@@ -75,26 +75,31 @@ const groupsListTable = {
 	rowHeight: 60,
 	hover: "hover_list",
 	data: currentUserGroups,
+	tooltip: true,
 	columns: [
 		{
 			id: "name",
 			header: [{text: "Groups names"}, {content: "textFilter"}],
-			fillspace: 2
+			fillspace: 2,
+			tooltip: false
 		},
 		{fillspace: 0.2},
 		{
 			id: "amount",
 			header: "amount of words",
-			fillspace: 1
+			fillspace: 1,
+			tooltip: false
 		},
 		{
 			id: "created",
 			header: "created",
 			format: webix.i18n.longDateFormatStr,
-			fillspace: 1
+			fillspace: 1,
+			tooltip: false
 		},
 		{
 			fillspace: 1,
+			tooltip: false,
 			template: (obj) => {
 				if (obj.amount === 0) {
 					return "";
@@ -105,6 +110,7 @@ const groupsListTable = {
 		{
 			id: "",
 			template: "{common.trashIcon()}",
+			tooltip: "delete",
 			width: 40
 		}
 	],
@@ -149,7 +155,7 @@ const groupsListTable = {
 	}
 };
 
-const groupsListButton = {
+const buttonAaddNewGroup = {
 	view: "button",
 	css: "webix_primary",
 	value: "+ add new group",
@@ -168,7 +174,7 @@ const groupsList = {
 	id: "groupsListId",
 	rows: [
 		groupsListTable,
-		groupsListButton
+		buttonAaddNewGroup
 	]
 };
 

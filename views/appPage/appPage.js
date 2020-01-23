@@ -22,10 +22,7 @@ const tabbar = {
 					]
 				},
 				{
-					cells: [
-						groups,
-						testResultsPage
-					]
+					cells: [groups, testResultsPage]
 				}
 			]
 		}

@@ -19,11 +19,7 @@ export const toolbar = {
 		{
 			view: "label",
 			width: 150,
-			label: "<span class='label_color'>Your Dictionary</span>",
-			click() {
-				$$("shop").show();
-				$$("myDatatable").show();
-			}
+			label: "<span class='label_color'>Your Dictionary</span>"
 		},
 		{},
 		{
@@ -41,7 +37,11 @@ export const toolbar = {
 			view: "button",
 			label: "Logout",
 			css: "webix_primary",
-			width: 100
+			width: 100,
+			click() {
+				$$("windowAutorization").show();
+				$$("authorization").show();
+			}
 		}
 	]
 };

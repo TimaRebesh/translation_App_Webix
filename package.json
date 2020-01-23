@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mdi/font": "^4.6.95"
+    "@mdi/font": "^4.6.95",
+    "node-polyglot": "^2.4.0"
   },
   "devDependencies": {
     "cssnano": "^4.1.10",

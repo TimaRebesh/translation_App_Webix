@@ -16,7 +16,7 @@ const testResultList = {
 	type: {
 		height: 57
 	},
-	template: "<div class='results_info'><b class='results_info_lab'>date:</b>#date#. <b class='results_info_lab'>result:</b>#result#</div>",
+	template: "<div class='results_info'>#num#.<b class='results_info_lab'>date:</b>#date#<b class='results_info_lab'>result:</b>#result#</div>",
 	data: testsResults
 };
 

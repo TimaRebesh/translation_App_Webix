@@ -31,7 +31,7 @@ const windowAutorization = webix.ui({
 						view: "text",
 						id: "emailLogin",
 						label: "Login",
-						value: "some",
+						value: "password = 1",
 						name: "login",
 						attributes: {
 							required: "true",
@@ -42,7 +42,7 @@ const windowAutorization = webix.ui({
 						view: "text",
 						type: "password",
 						id: "passwordLogin",
-						value: 1,
+						// value: 1,
 						label: "Password",
 						name: "password",
 						attributes: {
@@ -68,7 +68,27 @@ const windowAutorization = webix.ui({
 												value: "Login",
 												css: "webix_primary",
 
-												click() {	}
+												click() {
+													const values = $$("formWindowAutor").getValues();
+													const checkboxValue = $$("checkboxLogin").getValue();
+													const login = values.login.trim();
+													const password = values.password.trim();
+
+
+													let isFound = false;
+
+													if (password === "1") {
+														isFound = true;
+													}
+
+													if (isFound === false) {
+														webix.message("no match! Try again");
+														return;
+													}
+													$$("formWindowAutor").clear();
+													$$("windowAutorization").hide();
+													$$("appPage").show();
+												}
 											},
 											{width: 10},
 											{

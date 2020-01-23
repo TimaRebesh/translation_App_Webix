@@ -3,11 +3,12 @@ const currentUserFromServer =	{
 	name: "Jack",
 	password: "1",
 	score: "100",
+	lastNum: 4,
 	testsResults: [
-		{date: new Date(2020, 1, 1), result: 12},
-		{date: new Date(2019, 3, 2), result: 11},
-		{date: new Date(2018, 5, 2), result: 10},
-		{date: new Date(2017, 4, 2), result: 9}
+		{num: 4, date: new Date(2020, 1, 1), result: 12},
+		{num: 3, date: new Date(2019, 3, 2), result: 11},
+		{num: 2, date: new Date(2018, 5, 2), result: 10},
+		{num: 1, date: new Date(2017, 4, 2), result: 9}
 	],
 	groups: [
 		{

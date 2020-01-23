@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 import {mixedWords, setLabelsForTest, currentWordInArr} from "../groups/allGroups";
 import {winowOfLastResult} from "../testResults/windowOfLastResult";
-import {testsResults} from "../../data/currentUser";
+import {testsResults, currentUserFromServer, currentUser} from "../../data/currentUser";
 
 const checkChoice = (id) => {
 	const idButton = $$(id);
@@ -154,10 +154,13 @@ const nextWord = {
 			$$("score").refresh();
 
 			testsResults.add({
+				num: currentUserFromServer.lastNum += 1,
 				date: new Date(),
 				result: $$("scoredPoints").config.scoredPoints
-			});
+			}, 0);
+
 			$$("testResultList").refresh();
+
 
 			$$("tabbar").config.value = "testResultsPage";
 			$$("tabbar").refresh();
